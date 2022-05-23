@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains:annotations:$annotations_version"
+    compileOnly "org.apache.logging.log4j:log4j-slf4j18-impl:$log4j_version"
 }
 
 tasks.withType(JavaCompile).configureEach {

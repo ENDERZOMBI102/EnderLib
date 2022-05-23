@@ -17,9 +17,9 @@ public class Strings {
 	 * @return the formatted string
 	 */
 	public static @NotNull String format( @NotNull String fmt, Object... objs ) {
-		for ( Object obj : objs ) {
+		for ( Object obj : objs )
 			fmt = fmt.replaceFirst("\\{}", obj.toString() );
-		}
+
 		return fmt;
 	}
 
@@ -40,9 +40,9 @@ public class Strings {
 	 */
 	public static String snakeToPascal( String string ) {
 		String[] parts = string.split("_");
-		for ( int i = 0; i < parts.length; i++ ) {
+		for ( int i = 0; i < parts.length; i++ )
 			parts[i] = Character.toUpperCase( parts[i].charAt(0) ) + parts[i].substring(1);
-		}
+
 		return String.join( "", parts );
 	}
 }

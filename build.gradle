@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
 	implementation "org.jetbrains:annotations:$annotations_version"
+	compileOnly "org.apache.logging.log4j:log4j-slf4j18-impl:$log4j_version"
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -28,8 +29,7 @@ jar {
 		'Implementation-Title'    : 'EnderLib',
 		'Implementation-Version'  : archiveVersion,
 		'Implementation-Vendor'   : 'ENDERZOMBI102',
-		'Implementation-Timestamp': new Date().format("dd-MM-yyyy+HH:mm:ssZ"),
-		'Contains-Sources': 'java,class'
+		'Implementation-Timestamp': new Date().format("dd-MM-yyyy+HH:mm:ssZ")
 	]
 }
 

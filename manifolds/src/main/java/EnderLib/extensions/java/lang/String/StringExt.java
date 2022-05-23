@@ -1,9 +1,11 @@
-package com.enderzombi102.enderlib.extensions.java.lang.String;
+package EnderLib.extensions.java.lang.String;
 
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 import com.enderzombi102.enderlib.Strings;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.PrintStream;
 
 @Extension
 public class StringExt {
@@ -28,5 +30,33 @@ public class StringExt {
 	 */
 	public static @NotNull String snakeToPascal( @This String thiz ) {
 		return Strings.snakeToPascal( thiz );
+	}
+
+	/**
+	 * Print this {@link String} to {@link System#out}
+	 */
+	public static void print( @This String thiz ) {
+		thiz.print( System.out );
+	}
+
+	/**
+	 * Print this {@link String} to the given stream
+	 */
+	public static void print( @This String thiz, PrintStream stream ) {
+		stream.print( thiz );
+	}
+
+	/**
+	 * Print this {@link String} + \n to {@link System#out}
+	 */
+	public static void println( @This String thiz ) {
+		thiz.println( System.out );
+	}
+
+	/**
+	 * Print this {@link String} + \n to the given stream
+	 */
+	public static void println( @This String thiz, PrintStream stream ) {
+		stream.println( thiz );
 	}
 }

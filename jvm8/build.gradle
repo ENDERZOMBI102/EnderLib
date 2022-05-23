@@ -42,8 +42,8 @@ java {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            group 'com.enderzombi102'
-            artifactId 'enderlib-jvm8'
+            group 'com.enderzombi102.EnderLib'
+            artifactId 'jvm8'
             from components.java
         }
     }

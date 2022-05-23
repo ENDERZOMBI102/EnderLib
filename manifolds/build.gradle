@@ -62,8 +62,8 @@ java {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            group 'com.enderzombi102'
-            artifactId 'enderlib-manifolds'
+            group 'com.enderzombi102.EnderLib'
+            artifactId 'manifolds'
             from components.java
         }
     }

@@ -3,6 +3,7 @@ package com.enderzombi102.enderlib;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -21,8 +22,8 @@ public class Images {
 		int rotWidth = (int) Math.floor( img.getWidth() * cos + img.getHeight() * sin );
 		int rotHeight = (int) Math.floor( img.getHeight() * cos + img.getWidth() * sin );
 		// create new image and its Graphics2D object
-		var rotated = new BufferedImage( rotWidth, rotHeight, BufferedImage.TYPE_4BYTE_ABGR );
-		var graph = rotated.createGraphics();
+		BufferedImage rotated = new BufferedImage( rotWidth, rotHeight, BufferedImage.TYPE_4BYTE_ABGR );
+		Graphics2D graph = rotated.createGraphics();
 		// apply transform and draw image
 		graph.setTransform( AffineTransform.getRotateInstance(
 			rads,

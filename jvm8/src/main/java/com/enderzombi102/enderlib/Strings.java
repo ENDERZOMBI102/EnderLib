@@ -2,6 +2,7 @@ package com.enderzombi102.enderlib;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -29,9 +30,16 @@ public class Strings {
 	 */
 	public static String pascalToSnake( String string ) {
 		// Use regex to match all UPPERCASE letters, and replace them with their lowercase counterpart prefixed by _
-		string = UPPERCASE.matcher(string).replaceAll( result -> "_" + result.group().toLowerCase() );
-		// remove the starting _ as it's an artifact of this method
-		return string.startsWith("_") ? string.replaceFirst( "_", "" ) : string;
+		Matcher matcher = UPPERCASE.matcher(string);
+		StringBuffer buffer = new StringBuffer();
+		while ( matcher.find() ) {
+			matcher.appendReplacement(
+				buffer,
+				"_" + Character.toLowerCase( string.charAt( matcher.start() ) )
+			);
+		}
+		matcher.appendTail( buffer );
+		return buffer.toString().substring(1);
 	}
 
 	/**

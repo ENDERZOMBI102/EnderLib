@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Utility methods for calling methods without having to deal with exceptions.
  * Intended use case is calling methods with checked exceptions when it's known that for some reason it won't throw.
- * @author MattiDragon
+ * @author <a href="https://github.com/MattiDragon">MattiDragon</a>
  */
 public final class SafeUtils {
 	private static final Logger LOGGER = LoggerFactory.getLogger( "EnderLib | SafeUtils" );

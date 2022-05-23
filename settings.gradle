@@ -1,2 +1,3 @@
-include 'manifolds'
 include 'jvm8'
+include 'manifolds'
+include 'manifolds-jvm8'

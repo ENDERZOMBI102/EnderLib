@@ -4,7 +4,7 @@ plugins {
     id 'idea'
 }
 
-description = 'EnderLib module containing various extension methods and stuff'
+description = 'EnderLib module containing various extension methods and stuff for jvm 8'
 
 repositories {
     mavenCentral()
@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation "org.jetbrains:annotations:$annotations_version"
 
-    implementation rootProject
+    implementation project( ':jvm8' )
 
     // -- MANIFOLD --
     // manifold runtimes
@@ -34,8 +34,8 @@ dependencies {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.sourceCompatibility = 17
-    it.targetCompatibility = 17
+    it.sourceCompatibility = 8
+    it.targetCompatibility = 8
     it.options.encoding = 'UTF-8'
     it.options.compilerArgs += [ '-Xplugin:Manifold' ]
 }

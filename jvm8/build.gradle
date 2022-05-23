@@ -12,8 +12,6 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains:annotations:$annotations_version"
-
-    implementation rootProject
 }
 
 tasks.withType(JavaCompile).configureEach {

@@ -1,0 +1,78 @@
+plugins {
+    id 'maven-publish'
+    id 'java'
+    id 'idea'
+}
+
+description = 'EnderLib module containing various extension methods and stuff'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains:annotations:$annotations_version"
+
+    implementation rootProject
+
+    // -- MANIFOLD --
+    // manifold runtimes
+    compileOnly "systems.manifold:manifold-rt:$manifold_version"
+    compileOnly "systems.manifold:manifold-ext-rt:$manifold_version"
+    compileOnly "systems.manifold:manifold-collections:$manifold_version"
+    compileOnly "systems.manifold:manifold-io:$manifold_version"
+    compileOnly "systems.manifold:manifold-text:$manifold_version"
+    compileOnly "systems.manifold:manifold-darkj:$manifold_version"
+    // manifold processors
+    annotationProcessor "systems.manifold:manifold:$manifold_version"
+    annotationProcessor "systems.manifold:manifold-ext:$manifold_version"
+    annotationProcessor "systems.manifold:manifold-preprocessor:$manifold_version"
+    annotationProcessor "systems.manifold:manifold-exceptions:$manifold_version"
+    annotationProcessor "systems.manifold:manifold-strings:$manifold_version"
+    annotationProcessor "systems.manifold:manifold-collections:$manifold_version"
+    annotationProcessor "systems.manifold:manifold-darkj:$manifold_version"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.sourceCompatibility = 8
+    it.targetCompatibility = 8
+    it.options.encoding = 'UTF-8'
+    it.options.compilerArgs += [ '-Xplugin:Manifold' ]
+}
+
+jar {
+    from 'LICENSE', {
+        rename { "${it}_$archivesBaseName" }
+    }
+    manifest.attributes += [
+        'Implementation-Title'    : 'EnderLib Manifolds',
+        'Implementation-Version'  : archiveVersion,
+        'Implementation-Vendor'   : 'ENDERZOMBI102',
+        'Implementation-Timestamp': new Date().format("dd-MM-yyyy+HH:mm:ssZ"),
+        'Contains-Sources': 'java,class'
+    ]
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// configure the maven publication
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            group 'com.enderzombi102'
+            artifactId 'enderlib-manifolds'
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name 'Repsy'
+            credentials(PasswordCredentials)
+            url 'https://repsy.io/mvn/enderzombi102/mc'
+        }
+    }
+}

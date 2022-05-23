@@ -4,6 +4,8 @@ plugins {
 	id 'idea'
 }
 
+description = 'EnderLib main module, contains various utilities i commonly use'
+
 repositories {
 	mavenCentral()
 }
@@ -13,9 +15,9 @@ dependencies {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.sourceCompatibility = 8
+	it.sourceCompatibility = 17
+	it.targetCompatibility = 17
 	it.options.encoding = 'UTF-8'
-	it.options.release.set( 8 )
 }
 
 jar {
@@ -27,6 +29,7 @@ jar {
 		'Implementation-Version'  : archiveVersion,
 		'Implementation-Vendor'   : 'ENDERZOMBI102',
 		'Implementation-Timestamp': new Date().format("dd-MM-yyyy+HH:mm:ssZ"),
+		'Contains-Sources': 'java,class'
 	]
 }
 
@@ -45,7 +48,6 @@ publishing {
 	}
 
 	repositories {
-//		mavenLocal()
 		maven {
 			name 'Repsy'
 			credentials(PasswordCredentials)

@@ -8,8 +8,9 @@ import java.util.regex.Pattern;
 /**
  * A class with many String-related utilities
  */
-public class Strings {
+public final class Strings {
 	private static final Pattern UPPERCASE = Pattern.compile("[A-Z]");
+	private Strings() { }
 
 	/**
 	 * Used to format a string with {} syntax
@@ -52,5 +53,15 @@ public class Strings {
 			parts[i] = Character.toUpperCase( parts[i].charAt(0) ) + parts[i].substring(1);
 		}
 		return String.join( "", parts );
+	}
+
+	/**
+	 * Prints the fmt string formatted with the given objects::toString() values.<br/>
+	 * Replaces {n} with the n-th element toString() return
+	 */
+	public static void print( String fmt, Object... objs ) {
+		for ( int i = 0; i < objs.length; i++ )
+			fmt = fmt.replace( "{" + i + "}", objs[i].toString() );
+		System.out.println( fmt );
 	}
 }

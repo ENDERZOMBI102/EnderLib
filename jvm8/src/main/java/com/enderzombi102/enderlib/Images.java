@@ -7,7 +7,9 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-public class Images {
+public final class Images {
+	private Images() { }
+
 	/**
 	 * Function used to rotate a {@link BufferedImage} by $ANGLE degrees
 	 * @param img image to rotate

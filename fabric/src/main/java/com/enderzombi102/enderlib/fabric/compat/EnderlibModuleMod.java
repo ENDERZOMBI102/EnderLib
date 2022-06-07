@@ -91,12 +91,12 @@ class EnderlibModuleMod implements Mod {
 
 	@Override
 	public @Nullable String getIssueTracker() {
-		return Const.CONTAINER.metadata().getContactInfo( "issues" );
+		return Const.CONTAINER.getMetadata().getContact().get( "issues" ).orElseThrow();
 	}
 
 	@Override
 	public @Nullable String getSource() {
-		return Const.CONTAINER.metadata().getContactInfo( "sources" );
+		return Const.CONTAINER.getMetadata().getContact().get( "sources" ).orElseThrow();
 	}
 
 	@Override

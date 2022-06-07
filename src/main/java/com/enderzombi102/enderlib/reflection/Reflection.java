@@ -1,7 +1,6 @@
 package com.enderzombi102.enderlib.reflection;
 
 import com.sun.tools.attach.VirtualMachine;
-import sun.management.VMManagement;
 import sun.misc.Unsafe;
 
 import java.lang.invoke.MethodHandles;
@@ -9,17 +8,18 @@ import java.lang.invoke.MethodType;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-import static com.enderzombi102.enderlib.reflection.Invokers.*;
-import static com.enderzombi102.enderlib.reflection.Getters.*;
 import static com.enderzombi102.enderlib.reflection.Setters.*;
+import static com.enderzombi102.enderlib.reflection.Getters.*;
+import static com.enderzombi102.enderlib.reflection.Invokers.*;
 
 
 @SuppressWarnings("unchecked")
-final class ReflectionUtil {
+public final class Reflection {
 	static final MethodHandles.Lookup IMPL_LOOKUP;
 	static final Unsafe UNSAFE;
 
@@ -55,7 +55,6 @@ final class ReflectionUtil {
 				Map.class
 			).put( name, value );
 		} catch ( Throwable e ) { throw new RuntimeException(e); }
-
 	}
 
 	/**
@@ -91,13 +90,7 @@ final class ReflectionUtil {
 				Map.class
 			).put( "jdk.attach.allowAttachSelf", "true" );
 			// attach & load agent
-			VirtualMachine machine = VirtualMachine.attach( String.valueOf(
-				invoke(
-					get( ManagementFactory.getRuntimeMXBean(), "jvm", VMManagement.class ),
-					"getProcessId",
-					Integer.class
-				)
-			) );
+			VirtualMachine machine = VirtualMachine.attach( String.valueOf( ManagementFactory.getRuntimeMXBean().getPid() ) );
 			machine.loadAgent( jar );
 		} catch ( Throwable e ) { throw new RuntimeException( e ); }
 	}
@@ -116,6 +109,20 @@ final class ReflectionUtil {
 		return UNSAFE;
 	}
 
+	/**
+	 * Returns the class and method that called the method that called getCallingMethod()
+	 */
+	public static CallerInfo getCallingMethod() throws ClassNotFoundException {
+		var stack = Thread.currentThread().getStackTrace();
+		var frame = stack[ stack.length - 2 ];
+
+		return new CallerInfo(
+			Class.forName( frame.getClassName() ),
+			frame.getMethodName(),
+			frame.getLineNumber()
+		);
+	}
+
 	static {
 		try {
 			final Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
@@ -128,5 +135,7 @@ final class ReflectionUtil {
 			);
 		} catch (Throwable e) { throw new RuntimeException(e); }
 	}
+
+	public record CallerInfo( Class<?> clazz, String method, int line ) { }
 }
 

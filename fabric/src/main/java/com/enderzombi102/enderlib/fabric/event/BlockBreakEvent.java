@@ -1,14 +1,15 @@
 package com.enderzombi102.enderlib.fabric.event;
 
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.quiltmc.qsl.base.api.event.Event;
 
 public interface BlockBreakEvent {
-	Event<BlockBreakEvent> EVENT = Event.create(
+	Event<BlockBreakEvent> EVENT = EventFactory.createArrayBacked(
 		BlockBreakEvent.class,
 		callbacks -> ( entity, state, pos ) -> {
 			var cancelled = false;

@@ -1,6 +1,6 @@
 package com.enderzombi102.enderlib.reflection;
 
-import static com.enderzombi102.enderlib.reflection.ReflectionUtil.IMPL_LOOKUP;
+import static com.enderzombi102.enderlib.reflection.Reflection.IMPL_LOOKUP;
 
 public final class Setters {
 	private Setters() { }

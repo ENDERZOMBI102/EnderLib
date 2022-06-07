@@ -1,5 +1,6 @@
 package com.enderzombi102.enderlib.reflection;
 
+import com.enderzombi102.enderlib.SafeUtils;
 import com.sun.tools.attach.VirtualMachine;
 import sun.misc.Unsafe;
 
@@ -8,7 +9,6 @@ import java.lang.invoke.MethodType;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -112,12 +112,26 @@ public final class Reflection {
 	/**
 	 * Returns the class and method that called the method that called getCallingMethod()
 	 */
-	public static CallerInfo getCallingMethod() throws ClassNotFoundException {
+	public static CallerInfo getCallerInfo() throws ClassNotFoundException {
 		var stack = Thread.currentThread().getStackTrace();
 		var frame = stack[ stack.length - 2 ];
 
 		return new CallerInfo(
 			Class.forName( frame.getClassName() ),
+			frame.getMethodName(),
+			frame.getLineNumber()
+		);
+	}
+
+	/**
+	 * Returns the class and method that called the method that called getCallingMethod()
+	 */
+	public static CallerInfo getCallerInfoSafe() {
+		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+		StackTraceElement frame = stack[ stack.length - 2 ];
+
+		return new CallerInfo(
+			SafeUtils.doSafely( () -> Class.forName( frame.getClassName() ) ),
 			frame.getMethodName(),
 			frame.getLineNumber()
 		);

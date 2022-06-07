@@ -26,12 +26,14 @@ public abstract class WorldMixin {
 		cancellable = true
 	)
 	public void onBreak( BlockPos pos, boolean drop, Entity breakingEntity, int maxUpdateDepth, CallbackInfoReturnable<Boolean> cir, BlockState state ) {
-		var res = BlockBreakEvent.EVENT.invoker().onBlockBreak(
-			breakingEntity,
-			state,
-			pos
-		);
-		if (! res ) {
+		if (!
+			BlockBreakEvent.EVENT.invoker().onBlockBreak(
+				(World) (Object) this,
+				breakingEntity,
+				state,
+				pos
+			)
+		) {
 			cir.setReturnValue( false );
 			cir.cancel();
 		}

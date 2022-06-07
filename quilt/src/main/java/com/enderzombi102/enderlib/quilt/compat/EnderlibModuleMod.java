@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("ClassCanBeRecord")
+@SuppressWarnings({ "ClassCanBeRecord", "deprecation" })
 class EnderlibModuleMod implements Mod {
 	private final @NotNull String id;
 	private final @NotNull String name;

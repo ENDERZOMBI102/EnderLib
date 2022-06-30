@@ -122,7 +122,7 @@ public final class Reflection {
 	 */
 	public static CallerInfo getCallerInfo( @Range( from=0, to=100 ) int frameOffset ) throws ClassNotFoundException {
 		var stack = Thread.currentThread().getStackTrace();
-		var frame = stack[ stack.length - 1 - frameOffset ];
+		var frame = stack[ 2 + frameOffset ];
 
 		return new CallerInfo(
 			Class.forName( frame.getClassName() ),
@@ -143,7 +143,7 @@ public final class Reflection {
 	 */
 	public static CallerInfo getCallerInfoSafe( @Range( from=0, to=100 ) int frameOffset ) {
 		var stack = Thread.currentThread().getStackTrace();
-		var frame = stack[ stack.length - 1 - frameOffset ];
+		var frame = stack[ 2 + frameOffset ];
 
 		return new CallerInfo(
 			SafeUtils.doSafely( () -> Class.forName( frame.getClassName() ) ),

@@ -130,7 +130,7 @@ public final class Reflection {
 	 */
 	public static CallerInfo getCallerInfo( @Range( from=0, to=100 ) int frameOffset ) throws ClassNotFoundException {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		StackTraceElement frame = stack[ stack.length - 1 - frameOffset ];
+		StackTraceElement frame = stack[ 2 + frameOffset ];
 
 		return new CallerInfo(
 			Class.forName( frame.getClassName() ),
@@ -151,7 +151,7 @@ public final class Reflection {
 	 */
 	public static CallerInfo getCallerInfoSafe( @Range( from=0, to=100 ) int frameOffset ) {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		StackTraceElement frame = stack[ stack.length - 1 - frameOffset ];
+		StackTraceElement frame = stack[ 2 + frameOffset ];
 
 		return new CallerInfo(
 			SafeUtils.doSafely( () -> Class.forName( frame.getClassName() ) ),

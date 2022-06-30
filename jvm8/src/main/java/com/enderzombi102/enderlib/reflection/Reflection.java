@@ -2,6 +2,7 @@ package com.enderzombi102.enderlib.reflection;
 
 import com.enderzombi102.enderlib.SafeUtils;
 import com.sun.tools.attach.VirtualMachine;
+import org.jetbrains.annotations.Range;
 import sun.management.VMManagement;
 import sun.misc.Unsafe;
 
@@ -113,16 +114,23 @@ public final class Reflection {
 	/**
 	 * Getter for the sun's Unsafe object
 	 */
-	public static Unsafe getGodMode() {
+	public static Unsafe getUnsafe() {
 		return UNSAFE;
 	}
 
 	/**
-	 * Returns the class and method that called the method that called getCallingMethod()
+	 * Returns the class and method that called the method that called getCallerInfo()
 	 */
 	public static CallerInfo getCallerInfo() throws ClassNotFoundException {
+		return getCallerInfo( 1 );
+	}
+
+	/**
+	 * Returns the class and method at frame point -frameOffset from the getCallerInfo() call
+	 */
+	public static CallerInfo getCallerInfo( @Range( from=0, to=100 ) int frameOffset ) throws ClassNotFoundException {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		StackTraceElement frame = stack[ stack.length - 2 ];
+		StackTraceElement frame = stack[ stack.length - 1 - frameOffset ];
 
 		return new CallerInfo(
 			Class.forName( frame.getClassName() ),
@@ -132,11 +140,18 @@ public final class Reflection {
 	}
 
 	/**
-	 * Returns the class and method that called the method that called getCallingMethod()
+	 * Returns the class and method that called the method that called getCallerInfoSafe()
 	 */
 	public static CallerInfo getCallerInfoSafe() {
+		return getCallerInfoSafe( 1 );
+	}
+
+	/**
+	 * Returns the class and method at frame point -frameOffset from the getCallerInfo() call
+	 */
+	public static CallerInfo getCallerInfoSafe( @Range( from=0, to=100 ) int frameOffset ) {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		StackTraceElement frame = stack[ stack.length - 2 ];
+		StackTraceElement frame = stack[ stack.length - 1 - frameOffset ];
 
 		return new CallerInfo(
 			SafeUtils.doSafely( () -> Class.forName( frame.getClassName() ) ),

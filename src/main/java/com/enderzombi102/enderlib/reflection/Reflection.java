@@ -142,8 +142,8 @@ public final class Reflection {
 	 * Returns the class and method at frame point -frameOffset from the getCallerInfo() call
 	 */
 	public static CallerInfo getCallerInfoSafe( @Range( from=0, to=100 ) int frameOffset ) {
-		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		StackTraceElement frame = stack[ stack.length - 1 - frameOffset ];
+		var stack = Thread.currentThread().getStackTrace();
+		var frame = stack[ stack.length - 1 - frameOffset ];
 
 		return new CallerInfo(
 			SafeUtils.doSafely( () -> Class.forName( frame.getClassName() ) ),

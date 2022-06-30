@@ -2,6 +2,7 @@ package com.enderzombi102.enderlib.reflection;
 
 import com.enderzombi102.enderlib.SafeUtils;
 import com.sun.tools.attach.VirtualMachine;
+import org.jetbrains.annotations.Range;
 import sun.misc.Unsafe;
 
 import java.lang.invoke.MethodHandles;
@@ -13,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-import static com.enderzombi102.enderlib.reflection.Setters.*;
-import static com.enderzombi102.enderlib.reflection.Getters.*;
-import static com.enderzombi102.enderlib.reflection.Invokers.*;
+import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
+import static com.enderzombi102.enderlib.reflection.Invokers.invoke;
+import static com.enderzombi102.enderlib.reflection.Setters.setStatic;
 
 
 @SuppressWarnings("unchecked")
@@ -105,16 +106,23 @@ public final class Reflection {
 	/**
 	 * Getter for the sun's Unsafe object
 	 */
-	public static Unsafe getGodMode() {
+	public static Unsafe getUnsafe() {
 		return UNSAFE;
 	}
 
 	/**
-	 * Returns the class and method that called the method that called getCallingMethod()
+	 * Returns the class and method that called the method that called getCallerInfo()
 	 */
 	public static CallerInfo getCallerInfo() throws ClassNotFoundException {
+		return getCallerInfo( 1 );
+	}
+
+	/**
+	 * Returns the class and method at frame point -frameOffset from the getCallerInfo() call
+	 */
+	public static CallerInfo getCallerInfo( @Range( from=0, to=100 ) int frameOffset ) throws ClassNotFoundException {
 		var stack = Thread.currentThread().getStackTrace();
-		var frame = stack[ stack.length - 2 ];
+		var frame = stack[ stack.length - 1 - frameOffset ];
 
 		return new CallerInfo(
 			Class.forName( frame.getClassName() ),
@@ -124,11 +132,18 @@ public final class Reflection {
 	}
 
 	/**
-	 * Returns the class and method that called the method that called getCallingMethod()
+	 * Returns the class and method that called the method that called getCallerInfoSafe()
 	 */
 	public static CallerInfo getCallerInfoSafe() {
+		return getCallerInfoSafe( 1 );
+	}
+
+	/**
+	 * Returns the class and method at frame point -frameOffset from the getCallerInfo() call
+	 */
+	public static CallerInfo getCallerInfoSafe( @Range( from=0, to=100 ) int frameOffset ) {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-		StackTraceElement frame = stack[ stack.length - 2 ];
+		StackTraceElement frame = stack[ stack.length - 1 - frameOffset ];
 
 		return new CallerInfo(
 			SafeUtils.doSafely( () -> Class.forName( frame.getClassName() ) ),

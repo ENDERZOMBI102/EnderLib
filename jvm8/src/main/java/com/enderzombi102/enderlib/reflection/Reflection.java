@@ -6,18 +6,21 @@ import org.jetbrains.annotations.Range;
 import sun.management.VMManagement;
 import sun.misc.Unsafe;
 
+import java.io.File;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-import static com.enderzombi102.enderlib.reflection.Invokers.*;
-import static com.enderzombi102.enderlib.reflection.Getters.*;
-import static com.enderzombi102.enderlib.reflection.Setters.*;
+import static com.enderzombi102.enderlib.reflection.Getters.get;
+import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
+import static com.enderzombi102.enderlib.reflection.Invokers.invoke;
+import static com.enderzombi102.enderlib.reflection.Setters.setStatic;
 
 
 @SuppressWarnings("unchecked")
@@ -32,7 +35,7 @@ public final class Reflection {
 	 * @param args arguments to the Enum's constructor
 	 */
 	@SuppressWarnings("unchecked")
-	public static < T extends Enum<T> > void add( Class<T> clazz, String name, Object... args ) {
+	public static < T extends Enum<T> > void add( Class<T> clazz, String name ) {
 		try {
 			// get old array
 			T[] arr = getStatic( clazz, "$VALUES", arrayType( clazz ) );
@@ -67,9 +70,19 @@ public final class Reflection {
 	 * @param <T> type to create the array of
 	 */
 	public static <T> T[] arrayOf( Class<T> clazz ) {
-		return (T[]) Array.newInstance( clazz , 0 );
+		return arrayOf( clazz, 0 );
 	}
 
+	/**
+	 * Creates an array of the given class's objects and returns it
+	 * @param clazz type's class to create the array of
+	 * @param size the size of the to-be-created array
+	 * @return the created array
+	 * @param <T> type to create the array of
+	 */
+	public static <T> T[] arrayOf( Class<T> clazz, int size ) {
+		return (T[]) Array.newInstance( clazz , size );
+	}
 	/**
 	 * Creates an array of the given class's objects and returns its class object
 	 * @param clazz type's class to create the array of
@@ -77,14 +90,33 @@ public final class Reflection {
 	 * @param <T> type to create the array of
 	 */
 	public static <T> Class<T[]> arrayType( Class<T> clazz ) {
-		return (Class<T[]>) arrayOf( clazz ).getClass();
+		return (Class<T[]>) arrayOf( clazz, 0 ).getClass();
 	}
 
 	/**
-	 * Attach a java agent to the running jvm
-	 * @param jar the jar the agent is in, may be the same jar
+	 * Attach a java agent to the running jvm.<br>
+	 * It may be a jar or a native executable, the extension is used to determine which one it is. ( .jar == java, .* == native )
+	 * @param library the jar/dll the agent is in, may be the same jar
 	 */
-	public static void attachAgent( String jar ) {
+	public static void attachAgent( Path library ) {
+		attachAgent( library.toAbsolutePath().toString() );
+	}
+
+	/**
+	 * Attach a java agent to the running jvm.<br>
+	 * It may be a jar or a native executable, the extension is used to determine which one it is. ( .jar == java, .* == native )
+	 * @param library the jar/dll the agent is in, may be the same jar
+	 */
+	public static void attachAgent( File library ) {
+		attachAgent( library.getAbsolutePath() );
+	}
+
+	/**
+	 * Attach a java agent to the running jvm.<br>
+	 * It may be a jar or a native executable, the extension is used to determine which one it is. ( .jar == java, .* == native )
+	 * @param library the jar/dll the agent is in, may be the same jar
+	 */
+	public static void attachAgent( String library ) {
 		try {
 			// force the jvm to accept self-attachment
 			getStatic(
@@ -93,14 +125,20 @@ public final class Reflection {
 				Map.class
 			).put( "jdk.attach.allowAttachSelf", "true" );
 			// attach & load agent
-			VirtualMachine machine = VirtualMachine.attach( String.valueOf(
-				invoke(
-					get( ManagementFactory.getRuntimeMXBean(), "jvm", VMManagement.class ),
-					"getProcessId",
-					Integer.class
+			VirtualMachine machine = VirtualMachine.attach(
+				String.valueOf(
+					invoke(
+						get( ManagementFactory.getRuntimeMXBean(), "jvm", VMManagement.class ),
+						"getProcessId",
+						Integer.class
+					)
 				)
-			) );
-			machine.loadAgent( jar );
+			);
+			if ( library.endsWith( ".jar" ) )
+				machine.loadAgent( library );
+			else
+				machine.loadAgentLibrary( library );
+			machine.detach();
 		} catch ( Throwable e ) { throw new RuntimeException( e ); }
 	}
 

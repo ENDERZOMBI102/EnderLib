@@ -32,7 +32,6 @@ public final class Reflection {
 	 * Add a value to an enum
 	 * @param clazz the enum's class
 	 * @param name name of the value to add
-	 * @param args arguments to the Enum's constructor
 	 */
 	@SuppressWarnings("unchecked")
 	public static < T extends Enum<T> > void add( Class<T> clazz, String name ) {

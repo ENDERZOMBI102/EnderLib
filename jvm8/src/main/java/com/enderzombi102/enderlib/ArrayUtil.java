@@ -60,7 +60,7 @@ public class ArrayUtil {
 	}
 
 	public static Class<?>[] convertBoxes( Class<?>[] classes ) {
-		for ( var i = 0; i < classes.length; i++ )
+		for ( int i = 0; i < classes.length; i++ )
 			classes[i] = classes[i] == Boolean.class ? boolean.class :
 				classes[i] == Character.class ? char.class :
 					classes[i] == Short.class ? short.class :

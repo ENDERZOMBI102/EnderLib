@@ -7,7 +7,6 @@ pluginManagement {
 }
 
 include 'jvm8'
-include 'quilt'
-include 'fabric'
+include 'minecraft'
 include 'manifolds'
 include 'manifolds-jvm8'

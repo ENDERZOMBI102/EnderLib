@@ -1,0 +1,16 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.enderzombi102.enderlib.minecraft.mixin",
+	"plugin": "com.enderzombi102.enderlib.minecraft.mixin.EnderlibMixinPlugin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"WorldMixin"
+	],
+	"client": [
+		"ResourcePackMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

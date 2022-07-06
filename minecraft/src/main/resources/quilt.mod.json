@@ -1,0 +1,48 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "com.enderzombi102.enderlib",
+		"id": "enderlib-minecraft",
+		"version": "${version}",
+		"metadata": {
+			"name": "EnderLib Minecraft",
+			"description": "${description}",
+			"contributors": {
+				"ENDERZOMBI102": "Owner"
+			},
+			"contact": {
+				"issues": "${repo}/issues",
+				"sources": "${repo}"
+			},
+			"icon": "assets/enderlib/enderlib-quilt.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"modmenu": "com.enderzombi102.enderlib.minecraft.compat.modmenu.ModMenuCompat"
+		},
+		"language_adapters": {
+			"enderlib": "com.enderzombi102.enderlib.minecraft.EnderlibLanguageAdapter"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.16.0"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.18.2"
+			}
+		]
+	},
+	"mixin": "enderlib-quilt.mixins.json",
+	"modmenu": {
+		"badges": [ "library" ],
+		"parent": {
+			"id": "enderlib",
+			"name": "EnderLib",
+			"description": "A set of libraries to ease ENDERZOMBI102's java experience.",
+			"icon": "assets/enderlib/enderlib.png",
+			"badges": [ "library" ]
+		}
+	}
+}

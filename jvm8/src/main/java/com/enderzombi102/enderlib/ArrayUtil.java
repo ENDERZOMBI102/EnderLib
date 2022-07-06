@@ -3,7 +3,6 @@ package com.enderzombi102.enderlib;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class ArrayUtil {
@@ -15,10 +14,10 @@ public class ArrayUtil {
 	 * @return a new array with the contents of the two given arrays
 	 */
 	public static <T> T[] plus( T[] src0, T... src1 ) {
-		return (T[]) new ArrayList<>() {{
-			addAll( List.of(src0) );
-			addAll( List.of(src1) );
-		}}.toArray( Object[]::new );
+		return (T[]) new ArrayList<T>() {{
+			addAll( Arrays.asList( src0 ) );
+			addAll( Arrays.asList( src1 ) );
+		}}.toArray( arrayOf( Object.class, src0.length + src1.length ) );
 	}
 
 	/**

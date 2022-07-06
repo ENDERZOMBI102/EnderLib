@@ -93,55 +93,6 @@ public final class Reflection {
 	}
 
 	/**
-	 * Attach a java agent to the running jvm.<br>
-	 * It may be a jar or a native executable, the extension is used to determine which one it is. ( .jar == java, .* == native )
-	 * @param library the jar/dll the agent is in, may be the same jar
-	 */
-	public static void attachAgent( Path library ) {
-		attachAgent( library.toAbsolutePath().toString() );
-	}
-
-	/**
-	 * Attach a java agent to the running jvm.<br>
-	 * It may be a jar or a native executable, the extension is used to determine which one it is. ( .jar == java, .* == native )
-	 * @param library the jar/dll the agent is in, may be the same jar
-	 */
-	public static void attachAgent( File library ) {
-		attachAgent( library.getAbsolutePath() );
-	}
-
-	/**
-	 * Attach a java agent to the running jvm.<br>
-	 * It may be a jar or a native executable, the extension is used to determine which one it is. ( .jar == java, .* == native )
-	 * @param library the jar/dll the agent is in, may be the same jar
-	 */
-	public static void attachAgent( String library ) {
-		try {
-			// force the jvm to accept self-attachment
-			getStatic(
-				Class.forName("jdk.internal.misc.VM"),
-				"savedProps",
-				Map.class
-			).put( "jdk.attach.allowAttachSelf", "true" );
-			// attach & load agent
-			VirtualMachine machine = VirtualMachine.attach(
-				String.valueOf(
-					invoke(
-						get( ManagementFactory.getRuntimeMXBean(), "jvm", VMManagement.class ),
-						"getProcessId",
-						Integer.class
-					)
-				)
-			);
-			if ( library.endsWith( ".jar" ) )
-				machine.loadAgent( library );
-			else
-				machine.loadAgentLibrary( library );
-			machine.detach();
-		} catch ( Throwable e ) { throw new RuntimeException( e ); }
-	}
-
-	/**
 	 * Getter for the godly IMPL_LOOKUP
 	 */
 	public static MethodHandles.Lookup getImplLookup() {
@@ -233,6 +184,5 @@ public final class Reflection {
 			return clazz;
 		}
 	}
-
 }
 

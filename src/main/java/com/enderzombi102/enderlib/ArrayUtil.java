@@ -1,5 +1,7 @@
 package com.enderzombi102.enderlib;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +54,11 @@ public class ArrayUtil {
 		return (T[]) Array.newInstance( clazz , size );
 	}
 
+	/**
+	 * Returns an array with the classes of all the given objects
+	 * @param values objects to get the classes from
+	 * @return the {@link Class} array
+	 */
 	public static Class<?>[] classes( Object... values ) {
 		return convertBoxes(
 			Arrays.stream( values )
@@ -60,6 +67,11 @@ public class ArrayUtil {
 		);
 	}
 
+	/**
+	 * Replaces boxed classes with their unboxed variants, useful for reflection
+	 * @param classes classes to convert
+	 * @return an array with the classes replaced
+	 */
 	public static Class<?>[] convertBoxes( Class<?>[] classes ) {
 		for ( var i = 0; i < classes.length; i++ )
 			classes[i] = classes[i] == Boolean.class ? boolean.class :
@@ -70,5 +82,89 @@ public class ArrayUtil {
 								classes[i] == Double.class ? double.class :
 									classes[i];
 		return classes;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Float} wrappers into their primitives
+	 * @param floats the array of {@link Float}s
+	 * @return an array of float
+	 */
+	public static float[] primitive( Float @NotNull [] floats ) {
+		var arr = new float[ floats.length ];
+
+		for ( var index = 0; index < floats.length; index++ )
+			arr[index] = floats[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Integer} wrappers into their primitives
+	 * @param integers the array of {@link Integer}s
+	 * @return an array of int
+	 */
+	public static int[] primitive( Integer @NotNull [] integers ) {
+		var arr = new int[ integers.length ];
+
+		for ( var index = 0; index < integers.length; index++ )
+			arr[index] = integers[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Double} wrappers into their primitives
+	 * @param doubles the array of {@link Double}s
+	 * @return an array of double
+	 */
+	public static double[] primitive( Double @NotNull [] doubles ) {
+		var arr = new double[ doubles.length ];
+
+		for ( var index = 0; index < doubles.length; index++ )
+			arr[index] = doubles[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Boolean} wrappers into their primitives
+	 * @param booleans the array of {@link Boolean}s
+	 * @return an array of boolean
+	 */
+	public static boolean[] primitive( Boolean @NotNull [] booleans ) {
+		var arr = new boolean[ booleans.length ];
+
+		for ( var index = 0; index < booleans.length; index++ )
+			arr[index] = booleans[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Short} wrappers into their primitives
+	 * @param shorts the array of {@link Short}s
+	 * @return an array of short
+	 */
+	public static short[] primitive( Short @NotNull [] shorts ) {
+		var arr = new short[ shorts.length ];
+
+		for ( var index = 0; index < shorts.length; index++ )
+			arr[index] = shorts[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Byte} wrappers into their primitives
+	 * @param bytes the array of {@link Byte}s
+	 * @return an array of byte
+	 */
+	public static byte[] primitive( Byte @NotNull [] bytes ) {
+		var arr = new byte[ bytes.length ];
+
+		for ( var index = 0; index < bytes.length; index++ )
+			arr[index] = bytes[index];
+
+		return arr;
 	}
 }

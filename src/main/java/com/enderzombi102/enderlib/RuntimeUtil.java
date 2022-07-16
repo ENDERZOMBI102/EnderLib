@@ -99,14 +99,14 @@ public class RuntimeUtil {
 	 * @param nameGetter called with true if checking for a dev jar, used to get the name of the jarfile
 	 */
 	public static Path findJar( @NotNull Class<?> clazz, @NotNull Function<Boolean, String> nameGetter ) {
-		var loc = clazz.getProtectionDomain().getCodeSource().getLocation();
-		if ( loc.getPath().endsWith( ".jar" ) )
-			// its already the jar
-			return Path.of( loc.getPath() );
-		else if ( Path.of( "./../build/devlibs/", nameGetter.apply(true) ).toFile().exists() )
-			return Path.of( "./../build/devlibs/", nameGetter.apply(true) );
-		else if ( Path.of( "./../build/libs/", nameGetter.apply(false) ).toFile().exists() )
-			return Path.of( "./../build/libs/", nameGetter.apply(false) );
+		var locUrl = clazz.getProtectionDomain().getCodeSource().getLocation();
+		Path path;
+		if ( locUrl.getPath().endsWith( ".jar" ) )
+			return Path.of( locUrl.getPath() ); // it's already the jar
+		else if ( ( path = Path.of( "./../build/devlibs/", nameGetter.apply(true) ) ).toFile().exists() )
+			return path;
+		else if ( ( path = Path.of( "./../build/libs/", nameGetter.apply(false) ) ).toFile().exists() )
+			return path;
 		else
 			throw new IllegalStateException("Failed to find jar!");
 	}

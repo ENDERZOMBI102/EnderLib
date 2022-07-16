@@ -5,6 +5,7 @@ plugins {
 }
 
 description = 'EnderLib module with many minecraft utilities to be used with FabricMC ( jvm-17 )'
+version = fabric_version
 
 repositories {
 	maven { url 'https://maven.fabricmc.net' }

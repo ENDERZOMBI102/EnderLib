@@ -4,6 +4,7 @@ plugins {
 }
 
 description = 'EnderLib module with many minecraft utilities to be used with QuiltMC ( jvm-17 )'
+version = quilt_version
 
 repositories {
 	maven { url 'https://maven.fabricmc.net' }

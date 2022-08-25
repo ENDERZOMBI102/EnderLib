@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"": {
+			"model": "enderlib-testmod:block/testblock"
+		}
+	}
+}

@@ -9,8 +9,4 @@ public class Const {
 	@SuppressWarnings("OptionalGetWithoutIsPresent")
 	public static final ModContainer CONTAINER = FabricLoader.getInstance().getModContainer(ID).get();
 	public static final String VERSION = CONTAINER.getMetadata().getVersion().getFriendlyString();
-
-	public static Identifier getId( String key ) {
-		return new Identifier( ID, key );
-	}
 }

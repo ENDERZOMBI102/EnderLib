@@ -1,6 +1,6 @@
-package com.enderzombi102.enderlib.minecraft.mixin;
+package com.enderzombi102.enderlib.minecraft.impl.mixin;
 
-import com.enderzombi102.enderlib.minecraft.api.entrypoint.event.BlockBreakEvent;
+import com.enderzombi102.enderlib.minecraft.api.event.BlockBreakEvent;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;

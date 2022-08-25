@@ -1,6 +1,6 @@
-package com.enderzombi102.enderlib.minecraft.compat.modmenu;
+package com.enderzombi102.enderlib.minecraft.impl.compat.modmenu;
 
-import com.enderzombi102.enderlib.minecraft.Const;
+import com.enderzombi102.enderlib.minecraft.impl.Const;
 import com.terraformersmc.modmenu.ModMenu;
 import com.terraformersmc.modmenu.util.mod.Mod;
 import com.terraformersmc.modmenu.util.mod.fabric.FabricIconHandler;

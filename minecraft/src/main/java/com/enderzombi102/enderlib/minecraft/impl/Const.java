@@ -1,4 +1,4 @@
-package com.enderzombi102.enderlib.minecraft;
+package com.enderzombi102.enderlib.minecraft.impl;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;

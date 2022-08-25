@@ -1,4 +1,4 @@
-package com.enderzombi102.enderlib.minecraft.compat.modmenu;
+package com.enderzombi102.enderlib.minecraft.impl.compat.modmenu;
 
 import com.terraformersmc.modmenu.ModMenu;
 import com.terraformersmc.modmenu.api.ModMenuApi;

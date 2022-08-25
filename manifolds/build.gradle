@@ -5,6 +5,7 @@ plugins {
 }
 
 description = 'EnderLib module containing various extension methods and stuff'
+version = manifolds_version
 
 repositories {
     mavenCentral()

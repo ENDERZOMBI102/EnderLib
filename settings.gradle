@@ -11,3 +11,5 @@ include 'quilt'
 include 'fabric'
 include 'manifolds'
 include 'manifolds-jvm8'
+include 'DeepMirror'
+

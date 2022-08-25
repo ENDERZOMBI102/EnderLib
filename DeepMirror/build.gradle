@@ -4,9 +4,8 @@ plugins {
     id 'idea'
 }
 
-description = 'EnderLib for java 8, as the normal one is compiled for java 17'
-version = main_version
-
+description = 'DeepMirror is a deep reflection library, that can basically take over the JVM'
+version = deepmirror_version
 
 repositories {
     mavenCentral()
@@ -18,9 +17,13 @@ dependencies {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.sourceCompatibility = 8
-    it.targetCompatibility = 8
+    it.sourceCompatibility = 17
+    it.targetCompatibility = 17
     it.options.encoding = 'UTF-8'
+    it.options.compilerArgs = [
+        '--add-modules', 'jdk.hotspot.agent',
+        '--add-exports', 'jdk.hotspot.agent/sun.jvm.hotspot.runtime=ALL-UNNAMED'
+    ]
 }
 
 jar {
@@ -28,7 +31,7 @@ jar {
         rename { "${it}_$archivesBaseName" }
     }
     manifest.attributes += [
-        'Implementation-Title'    : 'EnderLib JVM 8',
+        'Implementation-Title'    : 'DeepMirror',
         'Implementation-Version'  : archiveVersion,
         'Implementation-Vendor'   : 'ENDERZOMBI102',
         'Implementation-Timestamp': new Date().format("dd-MM-yyyy+HH:mm:ssZ")
@@ -40,16 +43,12 @@ java {
     withSourcesJar()
 }
 
-javadoc {
-    options.addStringOption('-add-exports', 'java.management/sun.management=ALL-UNNAMED')
-}
-
 // configure the maven publication
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            group 'com.enderzombi102.EnderLib'
-            artifactId 'jvm8'
+            group 'com.enderzombi102'
+            artifactId 'DeepMirror'
             from components.java
         }
     }

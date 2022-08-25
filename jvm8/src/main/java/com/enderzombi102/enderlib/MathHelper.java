@@ -34,14 +34,4 @@ public final class MathHelper {
 	public static float clampedLerp( float start, float end, float delta ) {
 		return clamp( start, end, lerp( delta, start, end ) );
 	}
-
-	public static float toNormalized( int value, int fromStart, int fromEnd, float toStart, float toEnd ) {
-		if ( value < fromStart || value > fromEnd )
-			throw new IllegalArgumentException( "value must be between " + fromStart + " and " + fromEnd + ", but was " + value );
-
-		double fromDelta = fromEnd - fromStart;
-		double toDelta = toEnd - toStart;
-
-		return (float) ( ( ( value - fromStart ) / fromDelta ) * toDelta + toStart );
-	}
 }

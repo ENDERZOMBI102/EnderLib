@@ -15,11 +15,6 @@
 	"icon": "assets/enderlib/enderlib-fabric.png",
 
 	"environment": "*",
-	"entrypoints": {
-		"modmenu": [
-			"com.enderzombi102.enderlib.minecraft.impl.compat.modmenu.ModMenuCompat"
-		]
-	},
 	"mixins": [ "enderlib.mixins.json" ],
 
 	"depends": {

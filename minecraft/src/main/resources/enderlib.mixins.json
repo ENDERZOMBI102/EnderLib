@@ -4,10 +4,12 @@
 	"package": "com.enderzombi102.enderlib.minecraft.impl.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"WorldMixin",
-		"LanguageMixin"
+		"LanguageMixin",
+		"WorldMixin"
 	],
-	"client": [ ],
+	"client": [
+		"ModMenuMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}

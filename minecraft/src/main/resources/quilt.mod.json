@@ -17,9 +17,6 @@
 			"icon": "assets/enderlib/enderlib-quilt.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
-		"entrypoints": {
-			"modmenu": "com.enderzombi102.enderlib.minecraft.impl.compat.modmenu.ModMenuCompat"
-		},
 		"depends": [
 			{
 				"id": "quilt_loader",

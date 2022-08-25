@@ -4,6 +4,7 @@ plugins {
 }
 
 description = 'EnderLib module with many minecraft utilities to be used with'
+version = "$mcgame_version+$main_version"
 
 sourceSets {
 	testmod {
@@ -11,7 +12,6 @@ sourceSets {
 		runtimeClasspath += sourceSets.main.runtimeClasspath
 	}
 }
-version = quilt_version
 
 repositories {
 	maven { url 'https://maven.terraformersmc.com' }
@@ -30,6 +30,9 @@ dependencies {
 	modImplementation( "com.terraformersmc:modmenu:$modmenu_version" ) {
 		transitive = false
 	}
+
+	implementation include( rootProject )
+	implementation include( project( ':manifolds' ) )
 
 	testmodImplementation sourceSets.main.output
 }

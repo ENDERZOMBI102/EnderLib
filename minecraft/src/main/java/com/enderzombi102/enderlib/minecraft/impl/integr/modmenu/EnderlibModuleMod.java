@@ -1,10 +1,9 @@
-package com.enderzombi102.enderlib.minecraft.impl.compat.modmenu;
+package com.enderzombi102.enderlib.minecraft.impl.integr.modmenu;
 
 import com.enderzombi102.enderlib.minecraft.impl.Const;
 import com.terraformersmc.modmenu.ModMenu;
 import com.terraformersmc.modmenu.util.mod.Mod;
 import com.terraformersmc.modmenu.util.mod.fabric.FabricIconHandler;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.texture.NativeImageBackedTexture;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,16 +13,16 @@ import java.util.Map;
 import java.util.Set;
 
 @SuppressWarnings("ClassCanBeRecord")
-class EnderlibModuleMod implements Mod {
+public class EnderlibModuleMod implements Mod {
 	private final @NotNull String id;
 	private final @NotNull String name;
 	private final @NotNull String description;
 
-	EnderlibModuleMod( @NotNull String id, @NotNull String name, @NotNull String description ) {
+	public EnderlibModuleMod( @NotNull String id, @NotNull String name, @NotNull String description ) {
 		this.id = "enderlib-" + id;
-		this.name = "EnderLib - " + name;
+		this.name = "EnderLib: " + name;
 		this.description = description;
-		ModMenu.PARENT_MAP.put( this, ModMenu.MODS.get( "enderlib" ) );
+		ModMenu.PARENT_MAP.put( ModMenu.MODS.get( "enderlib" ), this );
 	}
 
 	@Override
@@ -39,14 +38,14 @@ class EnderlibModuleMod implements Mod {
 	@Override
 	public @NotNull NativeImageBackedTexture getIcon( FabricIconHandler handler, int i ) {
 		return handler.createIcon(
-			FabricLoader.getInstance().getModContainer( "enderlib-fabric" ).orElseThrow(),
-			"asstes/enderlib/" + this.id + ".png"
+			Const.CONTAINER,
+			"assets/enderlib/" + this.id + ".png"
 		);
 	}
 
 	@Override
 	public @NotNull String getSummary() {
-		return "";
+		return this.description;
 	}
 
 	@Override

@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "com.enderzombi102.enderlib.test",
+		"id": "enderlib-testmod",
+		"version": "0.1.0",
+		"metadata": {
+			"name": "EnderLib TestMod",
+			"description": "A lil testmod",
+			"contributors": {
+				"ENDERZOMBI102": "Owner"
+			},
+			"contact": {
+				"issues": "${repo}/issues",
+				"sources": "${repo}"
+			},
+			"icon": "assets/enderlib/enderlib.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": "com.enderzombi102.enderlib.test.TestMod"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.16.0"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.18"
+			}
+		]
+	},
+	"mixin": "testmod.mixins.json"
+}

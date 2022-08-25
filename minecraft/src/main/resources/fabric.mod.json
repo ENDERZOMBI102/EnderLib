@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "enderlib-minecraft",
+	"version": "${version}",
+
+	"name": "EnderLib Minecraft",
+	"description": "${description} FabricMC ( jvm-17 )",
+	"authors": [ "ENDERZOMBI102" ],
+	"contact": {
+		"issues": "${repo}/issues",
+		"sources": "${repo}"
+	},
+
+	"license": "MIT",
+	"icon": "assets/enderlib/enderlib-fabric.png",
+
+	"environment": "*",
+	"entrypoints": {
+		"modmenu": [
+			"com.enderzombi102.enderlib.minecraft.impl.compat.modmenu.ModMenuCompat"
+		]
+	},
+	"mixins": [ "enderlib.mixins.json" ],
+
+	"depends": {
+		"fabricloader": ">=0.7.4",
+		"fabric": "*",
+		"minecraft": ">=1.18.2"
+	},
+	"suggests": {
+		"modmenu": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"badges": [ "library" ],
+			"parent": {
+				"id": "enderlib",
+				"name": "EnderLib",
+				"description": "A set of libraries to ease ENDERZOMBI102's java experience.",
+				"icon": "assets/enderlib/enderlib.png",
+				"badges": [ "library" ]
+			}
+		}
+	}
+}

@@ -5,6 +5,7 @@ plugins {
 }
 
 description = 'EnderLib main module, contains various utilities i commonly use'
+version = main_version
 
 repositories {
 	mavenCentral()

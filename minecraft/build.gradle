@@ -11,6 +11,7 @@ sourceSets {
 		runtimeClasspath += sourceSets.main.runtimeClasspath
 	}
 }
+version = quilt_version
 
 repositories {
 	maven { url 'https://maven.terraformersmc.com' }

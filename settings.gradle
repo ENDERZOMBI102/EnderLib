@@ -11,3 +11,5 @@ include 'jvm8'
 include 'minecraft'
 include 'manifolds'
 include 'manifolds-jvm8'
+include 'DeepMirror'
+

@@ -17,7 +17,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"modmenu": [
-			"com.enderzombi102.enderlib.minecraft.compat.modmenu.ModMenuCompat"
+			"com.enderzombi102.enderlib.minecraft.impl.compat.modmenu.ModMenuCompat"
 		]
 	},
 	"mixins": [ "enderlib.mixins.json" ],

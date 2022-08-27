@@ -3,9 +3,8 @@ package com.enderzombi102.enderlib.reflection;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
+import static com.enderzombi102.enderlib.collections.ArrayUtil.classes;
 import static com.enderzombi102.enderlib.reflection.Reflection.IMPL_LOOKUP;
 
 @SuppressWarnings("unchecked")
@@ -14,14 +13,7 @@ public final class Invokers {
 
 	public static <T> T invoke( Object obj, String name, Class<T> retType, Object... args ) {
 		try {
-			return (T) obj.getClass()
-				.getDeclaredMethod(
-					name,
-					Arrays.stream( args )
-						.map( Object::getClass )
-						.collect( Collectors.toList() )
-						.toArray( new Class[] { } )
-				).invoke( obj, args );
+			return (T) obj.getClass().getDeclaredMethod( name, classes( args ) ).invoke( obj, args );
 		} catch ( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
 			throw new RuntimeException( e );
 		}
@@ -29,14 +21,7 @@ public final class Invokers {
 
 	public static void invoke( Object obj, String name, Object... args ) {
 		try {
-			obj.getClass()
-				.getDeclaredMethod(
-					name,
-					Arrays.stream( args )
-						.map( Object::getClass )
-						.collect( Collectors.toList() )
-						.toArray( new Class[] {} )
-				).invoke( obj, args );
+			obj.getClass().getDeclaredMethod( name, classes( args ) ).invoke( obj, args );
 		} catch ( IllegalAccessException | InvocationTargetException | NoSuchMethodException e ) {
 			throw new RuntimeException( e );
 		}
@@ -55,9 +40,7 @@ public final class Invokers {
 			clazz,
 			name,
 			retType,
-			Arrays.stream( params )
-				.map( Object::getClass )
-				.toArray( Class[]::new )
+			classes( params )
 		);
 		if ( params.length == 0 )
 			return (T) handle.invoke();

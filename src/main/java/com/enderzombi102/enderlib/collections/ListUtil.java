@@ -1,4 +1,4 @@
-package com.enderzombi102.enderlib;
+package com.enderzombi102.enderlib.collections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,5 +13,10 @@ public class ListUtil {
 	@SafeVarargs
 	public static <T> List<T> mutableListOf( T... values ) {
 		return append( new ArrayList<>(), values );
+	}
+
+	@SafeVarargs
+	public static <T> List<T> listOf( T... values ) {
+		return List.of( values );
 	}
 }

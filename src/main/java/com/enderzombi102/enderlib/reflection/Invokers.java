@@ -3,7 +3,7 @@ package com.enderzombi102.enderlib.reflection;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
 
-import static com.enderzombi102.enderlib.ArrayUtil.classes;
+import static com.enderzombi102.enderlib.collections.ArrayUtil.classes;
 import static com.enderzombi102.enderlib.reflection.Reflection.IMPL_LOOKUP;
 
 @SuppressWarnings("unchecked")

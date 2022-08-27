@@ -1,8 +1,10 @@
-package com.enderzombi102.enderlib;
+package com.enderzombi102.enderlib.collections;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.enderzombi102.enderlib.reflection.Types.unbox;
 
 @SuppressWarnings("unchecked")
 public class ArrayUtil {
@@ -61,13 +63,7 @@ public class ArrayUtil {
 
 	public static Class<?>[] convertBoxes( Class<?>[] classes ) {
 		for ( int i = 0; i < classes.length; i++ )
-			classes[i] = classes[i] == Boolean.class ? boolean.class :
-				classes[i] == Character.class ? char.class :
-					classes[i] == Short.class ? short.class :
-						classes[i] == Integer.class ? int.class :
-							classes[i] == Float.class ? float.class :
-								classes[i] == Double.class ? double.class :
-									classes[i];
+			classes[i] = unbox( classes[i] );
 		return classes;
 	}
 }

@@ -8,8 +8,8 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.Map;
 
-import static com.enderzombi102.enderlib.ArrayUtil.*;
-import static com.enderzombi102.enderlib.ListUtil.*;
+import static com.enderzombi102.enderlib.collections.ArrayUtil.*;
+import static com.enderzombi102.enderlib.collections.ListUtil.*;
 import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
 import static com.enderzombi102.enderlib.reflection.Invokers.invoke;
 import static com.enderzombi102.enderlib.reflection.Setters.setStatic;

@@ -1,23 +1,16 @@
 package com.enderzombi102.enderlib.reflection;
 
 import com.enderzombi102.enderlib.SafeUtils;
-import com.sun.tools.attach.VirtualMachine;
 import org.jetbrains.annotations.Range;
-import sun.management.VMManagement;
 import sun.misc.Unsafe;
 
-import java.io.File;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.lang.management.ManagementFactory;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 
-import static com.enderzombi102.enderlib.reflection.Getters.get;
+import static com.enderzombi102.enderlib.collections.ArrayUtil.*;
+import static com.enderzombi102.enderlib.collections.ListUtil.*;
 import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
 import static com.enderzombi102.enderlib.reflection.Invokers.invoke;
 import static com.enderzombi102.enderlib.reflection.Setters.setStatic;
@@ -47,10 +40,7 @@ public final class Reflection {
 			setStatic(
 				clazz,
 				"$VALUES",
-				new ArrayList<T>() {{
-					Collections.addAll( this, arr );
-					add( value );
-				}}.toArray( arrayOf( clazz ) )
+				append( mutableListOf( arr ), value ).toArray( arrayOf( clazz ) )
 			);
 			// add to const dir
 			invoke(
@@ -59,37 +49,6 @@ public final class Reflection {
 				Map.class
 			).put( name, value );
 		} catch ( Throwable e ) { throw new RuntimeException(e); }
-
-	}
-
-	/**
-	 * Creates an array of the given class's objects and returns it
-	 * @param clazz type's class to create the array of
-	 * @return the created array
-	 * @param <T> type to create the array of
-	 */
-	public static <T> T[] arrayOf( Class<T> clazz ) {
-		return arrayOf( clazz, 0 );
-	}
-
-	/**
-	 * Creates an array of the given class's objects and returns it
-	 * @param clazz type's class to create the array of
-	 * @param size the size of the to-be-created array
-	 * @return the created array
-	 * @param <T> type to create the array of
-	 */
-	public static <T> T[] arrayOf( Class<T> clazz, int size ) {
-		return (T[]) Array.newInstance( clazz , size );
-	}
-	/**
-	 * Creates an array of the given class's objects and returns its class object
-	 * @param clazz type's class to create the array of
-	 * @return the created array's class object
-	 * @param <T> type to create the array of
-	 */
-	public static <T> Class<T[]> arrayType( Class<T> clazz ) {
-		return (Class<T[]>) arrayOf( clazz, 0 ).getClass();
 	}
 
 	/**

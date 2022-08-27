@@ -22,7 +22,10 @@ tasks.withType(JavaCompile).configureEach {
     it.options.encoding = 'UTF-8'
     it.options.compilerArgs = [
         '--add-modules', 'jdk.hotspot.agent',
-        '--add-exports', 'jdk.hotspot.agent/sun.jvm.hotspot.runtime=ALL-UNNAMED'
+        '--add-exports', 'jdk.hotspot.agent/sun.jvm.hotspot.runtime=ALL-UNNAMED',
+        '--add-exports', 'jdk.hotspot.agent/sun.jvm.hotspot.debugger=ALL-UNNAMED',
+        '--add-exports', 'jdk.hotspot.agent/sun.jvm.hotspot.debugger.cdbg=ALL-UNNAMED',
+        '--add-exports', 'jdk.hotspot.agent/sun.jvm.hotspot=ALL-UNNAMED'
     ]
 }
 

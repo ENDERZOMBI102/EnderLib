@@ -3,6 +3,7 @@ package com.enderzombi102.enderlib.collections;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.enderzombi102.enderlib.reflection.Types.unbox;
 
@@ -23,16 +24,6 @@ public class ArrayUtil {
 	}
 
 	/**
-	 * Creates an array of the given class's objects and returns it
-	 * @param clazz type's class to create the array of
-	 * @return the created array
-	 * @param <T> type to create the array of
-	 */
-	public static <T> T[] arrayOf( Class<T> clazz ) {
-		return arrayOf( clazz, 0 );
-	}
-
-	/**
 	 * Creates an array of the given class's objects and returns its class object
 	 * @param clazz type's class to create the array of
 	 * @return the created array's class object
@@ -45,12 +36,31 @@ public class ArrayUtil {
 	/**
 	 * Creates an array of the given class's objects and returns it
 	 * @param clazz type's class to create the array of
+	 * @return the created array
+	 * @param <T> type to create the array of
+	 */
+	public static <T> T[] arrayOf( Class<T> clazz ) {
+		return arrayOf( clazz, 0 );
+	}
+
+	/**
+	 * Creates an array of the given class's objects and returns it
+	 * @param clazz type's class to create the array of
 	 * @param size the size of the to-be-created array
 	 * @return the created array
 	 * @param <T> type to create the array of
 	 */
 	public static <T> T[] arrayOf( Class<T> clazz, int size ) {
 		return (T[]) Array.newInstance( clazz , size );
+	}
+
+	/**
+	 * Converts a list of type {@link T} to an array
+	 * @param list list to convert
+	 * @return a new array with the elements of the list
+	 */
+	public static <T> T[] arrayOf( List<T> list ) {
+		return list.toArray( arrayOf( (Class<T>) list.get( 0 ).getClass() ) );
 	}
 
 	public static Class<?>[] classes( Object... values ) {

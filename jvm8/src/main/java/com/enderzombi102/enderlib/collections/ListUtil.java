@@ -1,15 +1,20 @@
 package com.enderzombi102.enderlib.collections;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
+
 public class ListUtil {
+	public static <T> List<T> append( List<T> dest, List<T> src ) {
+		dest.addAll( src );
+		return dest;
+	}
+
 	@SafeVarargs
-	public static <T> List<T> append( List<T> list, T... values ) {
-		list.addAll( Arrays.asList( values ) );
-		return list;
+	public static <T> List<T> append( List<T> dest, T... values ) {
+		return append( dest, asList( values ) );
 	}
 
 	@SafeVarargs
@@ -19,6 +24,6 @@ public class ListUtil {
 
 	@SafeVarargs
 	public static <T> List<T> listOf( T... values ) {
-		return Collections.unmodifiableList( Arrays.asList( values ) );
+		return unmodifiableList( asList( values ) );
 	}
 }

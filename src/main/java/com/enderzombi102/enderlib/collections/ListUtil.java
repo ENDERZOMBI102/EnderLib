@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListUtil {
+	public static <T> List<T> append( List<T> dest, List<T> src ) {
+		dest.addAll( src );
+		return dest;
+	}
+
 	@SafeVarargs
-	public static <T> List<T> append( List<T> list, T... values ) {
-		list.addAll( List.of( values ) );
-		return list;
+	public static <T> List<T> append( List<T> dest, T... values ) {
+		return append( dest, listOf( values ) );
 	}
 
 	@SafeVarargs

@@ -1,0 +1,50 @@
+[versions]
+	jankson = '1.2.1'
+	annotations = '23.0.0'
+	slf4j = '1.8.0-beta4'
+	# manifold modules
+	manifold = '2022.1.19'
+	# minecraft modules
+	minecraft = '1.19.2'
+	mappings = '1.19.2+build.3'
+	loader = '0.17.1'
+	qfapi = '4.0.0-beta.7+0.59.0-1.19.2'
+	modmenu = '4.0.6'
+
+[libraries]
+	annotations = { module = 'org.jetbrains:annotations', version.ref = 'annotations' }
+	slf4j = { module = 'org.slf4j:slf4j-api', version.ref = 'slf4j' }
+	jankson = { module = 'blue.endless:jankson', version.ref = 'jankson' }
+	# manifold runtime
+	manifold-rt = { module = 'systems.manifold:manifold-rt', version.ref = 'manifold' }
+	manifold-ext-rt = { module = 'systems.manifold:manifold-ext-rt', version.ref = 'manifold' }
+	manifold-collections = { module = 'systems.manifold:manifold-collections', version.ref = 'manifold' }
+	manifold-io = { module = 'systems.manifold:manifold-io', version.ref = 'manifold' }
+	manifold-text = { module = 'systems.manifold:manifold-text', version.ref = 'manifold' }
+	manifold-darkj = { module = 'systems.manifold:manifold-darkj', version.ref = 'manifold' }
+	# manifold processors
+	proc-manifold = { module = 'systems.manifold:manifold', version.ref = 'manifold' }
+	proc-manifold-ext = { module = 'systems.manifold:manifold-ext', version.ref = 'manifold' }
+	proc-manifold-preprocessor = { module = 'systems.manifold:manifold-preprocessor', version.ref = 'manifold' }
+	proc-manifold-exceptions = { module = 'systems.manifold:manifold-exceptions', version.ref = 'manifold' }
+	proc-manifold-strings = { module = 'systems.manifold:manifold-strings', version.ref = 'manifold' }
+	proc-manifold-collections = { module = 'systems.manifold:manifold-collections', version.ref = 'manifold' }
+	proc-manifold-darkj = { module = 'systems.manifold:manifold-darkj', version.ref = 'manifold' }
+	# minecraft
+	loader = { module = 'org.quiltmc:quilt-loader', version.ref = 'loader' }
+	minecraft = { module = 'com.mojang:minecraft', version.ref = 'minecraft' }
+	mappings = { module = 'org.quiltmc:quilt-mappings', version.ref = 'mappings' }
+	qfapi = { module = 'org.quiltmc.quilted-fabric-api:quilted-fabric-api', version.ref = 'qfapi' }
+	modmenu = { module = 'com.terraformersmc:modmenu', version.ref = 'modmenu' }
+
+[bundles]
+	manifold_comp = [
+		'manifold-rt', 'manifold-ext-rt', 'manifold-collections',
+		'manifold-io', 'manifold-text', 'manifold-darkj'
+	]
+	manifold_proc = [
+		'proc-manifold', 'proc-manifold-ext', 'proc-manifold-preprocessor',
+		'proc-manifold-exceptions', 'proc-manifold-strings', 'proc-manifold-collections',
+		'proc-manifold-darkj'
+	]
+	minecraft_modImplementation = [ 'loader', 'qfapi', 'modmenu' ]

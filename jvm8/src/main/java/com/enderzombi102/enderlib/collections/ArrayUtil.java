@@ -1,5 +1,7 @@
 package com.enderzombi102.enderlib.collections;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,4 +78,178 @@ public class ArrayUtil {
 			classes[i] = unbox( classes[i] );
 		return classes;
 	}
+
+	// region to primitives
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Float} wrappers into their primitives
+	 * @param floats the array of {@link Float}s
+	 * @return an array of float
+	 */
+	public static float[] primitive( Float @NotNull [] floats ) {
+		float[] arr = new float[ floats.length ];
+
+		for ( int index = 0; index < floats.length; index++ )
+			arr[index] = floats[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Integer} wrappers into their primitives
+	 * @param integers the array of {@link Integer}s
+	 * @return an array of int
+	 */
+	public static int[] primitive( Integer @NotNull [] integers ) {
+		int[] arr = new int[ integers.length ];
+
+		for ( int index = 0; index < integers.length; index++ )
+			arr[index] = integers[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Double} wrappers into their primitives
+	 * @param doubles the array of {@link Double}s
+	 * @return an array of double
+	 */
+	public static double[] primitive( Double @NotNull [] doubles ) {
+		double[] arr = new double[ doubles.length ];
+
+		for ( int index = 0; index < doubles.length; index++ )
+			arr[index] = doubles[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Boolean} wrappers into their primitives
+	 * @param booleans the array of {@link Boolean}s
+	 * @return an array of boolean
+	 */
+	public static boolean[] primitive( Boolean @NotNull [] booleans ) {
+		boolean[] arr = new boolean[ booleans.length ];
+
+		for ( int index = 0; index < booleans.length; index++ )
+			arr[index] = booleans[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Short} wrappers into their primitives
+	 * @param shorts the array of {@link Short}s
+	 * @return an array of short
+	 */
+	public static short[] primitive( Short @NotNull [] shorts ) {
+		short[] arr = new short[ shorts.length ];
+
+		for ( int index = 0; index < shorts.length; index++ )
+			arr[index] = shorts[index];
+
+		return arr;
+	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Byte} wrappers into their primitives
+	 * @param bytes the array of {@link Byte}s
+	 * @return an array of byte
+	 */
+	public static byte[] primitive( Byte @NotNull [] bytes ) {
+		byte[] arr = new byte[ bytes.length ];
+
+		for ( int index = 0; index < bytes.length; index++ )
+			arr[index] = bytes[index];
+
+		return arr;
+	}
+	// endregion to primitives
+
+	// region to box
+
+	/**
+	 * Converts an array of floats to an array of {@link Float}.
+	 * @param floats array to convert.
+	 * @return The same array but with the boxed version of float.
+	 */
+	public static Float[] box( float @NotNull [] floats ) {
+		Float[] arr = new Float[ floats.length ];
+
+		for ( int index = 0; index < floats.length; index++ )
+			arr[index] = floats[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of integers to an array of {@link Integer}.
+	 * @param integers array to convert.
+	 * @return The same array but with the boxed version of int.
+	 */
+	public static Integer[] box( int @NotNull [] integers ) {
+		Integer[] arr = new Integer[ integers.length ];
+
+		for ( int index = 0; index < integers.length; index++ )
+			arr[index] = integers[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of doubles to an array of {@link Double}.
+	 * @param doubles array to convert.
+	 * @return The same array but with the boxed version of double.
+	 */
+	public static Double[] box( double @NotNull [] doubles ) {
+		Double[] arr = new Double[ doubles.length ];
+
+		for ( int index = 0; index < doubles.length; index++ )
+			arr[index] = doubles[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of booleans to an array of {@link Boolean}.
+	 * @param booleans array to convert.
+	 * @return The same array but with the boxed version of boolean.
+	 */
+	public static Boolean[] box( boolean @NotNull [] booleans ) {
+		Boolean[] arr = new Boolean[ booleans.length ];
+
+		for ( int index = 0; index < booleans.length; index++ )
+			arr[index] = booleans[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of shorts to an array of {@link Short}.
+	 * @param shorts array to convert.
+	 * @return The same array but with the boxed version of short.
+	 */
+	public static Short[] box( short @NotNull [] shorts ) {
+		Short[] arr = new Short[ shorts.length ];
+
+		for ( int index = 0; index < shorts.length; index++ )
+			arr[index] = shorts[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of bytes to an array of {@link Byte}.
+	 * @param bytes array to convert.
+	 * @return The same array but with the boxed version of byte.
+	 */
+	public static Byte[] box( byte @NotNull [] bytes ) {
+		Byte[] arr = new Byte[ bytes.length ];
+
+		for ( int index = 0; index < bytes.length; index++ )
+			arr[index] = bytes[index];
+
+		return arr;
+	}
+	// endregion to box
+
 }

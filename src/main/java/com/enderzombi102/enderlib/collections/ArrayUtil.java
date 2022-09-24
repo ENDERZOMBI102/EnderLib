@@ -89,6 +89,8 @@ public class ArrayUtil {
 		return classes;
 	}
 
+
+	// region to primitives
 	/**
 	 * Uses the power of iterators to de-wrap all {@link Float} wrappers into their primitives
 	 * @param floats the array of {@link Float}s
@@ -172,4 +174,92 @@ public class ArrayUtil {
 
 		return arr;
 	}
+	// endregion to primitives
+
+	// region to box
+
+	/**
+	 * Converts an array of floats to an array of {@link Float}.
+	 * @param floats array to convert.
+	 * @return The same array but with the boxed version of float.
+	 */
+	public static Float[] box( float @NotNull [] floats ) {
+		var arr = new Float[ floats.length ];
+
+		for ( var index = 0; index < floats.length; index++ )
+			arr[index] = floats[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of integers to an array of {@link Integer}.
+	 * @param integers array to convert.
+	 * @return The same array but with the boxed version of int.
+	 */
+	public static Integer[] box( int @NotNull [] integers ) {
+		var arr = new Integer[ integers.length ];
+
+		for ( var index = 0; index < integers.length; index++ )
+			arr[index] = integers[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of doubles to an array of {@link Double}.
+	 * @param doubles array to convert.
+	 * @return The same array but with the boxed version of double.
+	 */
+	public static Double[] box( double @NotNull [] doubles ) {
+		var arr = new Double[ doubles.length ];
+
+		for ( var index = 0; index < doubles.length; index++ )
+			arr[index] = doubles[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of booleans to an array of {@link Boolean}.
+	 * @param booleans array to convert.
+	 * @return The same array but with the boxed version of boolean.
+	 */
+	public static Boolean[] box( boolean @NotNull [] booleans ) {
+		var arr = new Boolean[ booleans.length ];
+
+		for ( var index = 0; index < booleans.length; index++ )
+			arr[index] = booleans[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of shorts to an array of {@link Short}.
+	 * @param shorts array to convert.
+	 * @return The same array but with the boxed version of short.
+	 */
+	public static Short[] box( short @NotNull [] shorts ) {
+		var arr = new Short[ shorts.length ];
+
+		for ( var index = 0; index < shorts.length; index++ )
+			arr[index] = shorts[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of bytes to an array of {@link Byte}.
+	 * @param bytes array to convert.
+	 * @return The same array but with the boxed version of byte.
+	 */
+	public static Byte[] box( byte @NotNull [] bytes ) {
+		var arr = new Byte[ bytes.length ];
+
+		for ( var index = 0; index < bytes.length; index++ )
+			arr[index] = bytes[index];
+
+		return arr;
+	}
+	// endregion to box
 }

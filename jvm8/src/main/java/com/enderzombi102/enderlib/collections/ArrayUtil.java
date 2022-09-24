@@ -163,6 +163,20 @@ public class ArrayUtil {
 
 		return arr;
 	}
+
+	/**
+	 * Uses the power of iterators to de-wrap all {@link Character} wrappers into their primitives
+	 * @param bytes the array of {@link Character}s
+	 * @return an array of char
+	 */
+	public static char[] primitive( Character @NotNull [] bytes ) {
+		char[] arr = new char[ bytes.length ];
+
+		for ( int index = 0; index < bytes.length; index++ )
+			arr[index] = bytes[index];
+
+		return arr;
+	}
 	// endregion to primitives
 
 	// region to box
@@ -244,6 +258,20 @@ public class ArrayUtil {
 	 */
 	public static Byte[] box( byte @NotNull [] bytes ) {
 		Byte[] arr = new Byte[ bytes.length ];
+
+		for ( int index = 0; index < bytes.length; index++ )
+			arr[index] = bytes[index];
+
+		return arr;
+	}
+
+	/**
+	 * Converts an array of chars to an array of {@link Character}.
+	 * @param bytes array to convert.
+	 * @return The same array but with the boxed version of char.
+	 */
+	public static Character[] box( char @NotNull [] bytes ) {
+		Character[] arr = new Character[ bytes.length ];
 
 		for ( int index = 0; index < bytes.length; index++ )
 			arr[index] = bytes[index];

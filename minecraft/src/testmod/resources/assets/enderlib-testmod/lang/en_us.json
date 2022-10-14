@@ -1,5 +1,8 @@
 {
 	"block.enderlib-testmod": {
-		"testblock": "Test Block"
+		"testblock": [
+			{ "text": "Test ", "color": "#0096FF" },
+			{ "text": "Block", "color": "#00FF00" }
+		]
 	}
 }

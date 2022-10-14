@@ -14,6 +14,7 @@ sourceSets {
 }
 
 repositories {
+	maven( url="https://jitpack.io" )
 	maven( url="https://maven.terraformersmc.com" )
 	maven( url="https://maven.quiltmc.org/repository/release" )
 	maven( url="https://maven.quiltmc.org/repository/shanpshot" )
@@ -28,6 +29,10 @@ dependencies {
 		addLayer( quiltMappings.mappings( "org.quiltmc:quilt-mappings:$minecraft_version+build.$mappings:v2" ) )
 	})
 	modImplementation( rootProject.libs.bundles.minecraft.modImplementation )
+
+	include( rootProject.libs.mextras )
+	implementation( rootProject.libs.mextras )
+	annotationProcessor( rootProject.libs.mextras )
 
 	implementation( include( rootProject )!! )
 	implementation( include( project( ":manifolds" ) )!! )

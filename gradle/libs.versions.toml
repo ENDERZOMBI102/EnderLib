@@ -10,6 +10,7 @@
 	loader = '0.17.1'
 	qfapi = '4.0.0-beta.7+0.59.0-1.19.2'
 	modmenu = '4.0.6'
+	mextras = '0.0.12'
 
 [libraries]
 	annotations = { module = 'org.jetbrains:annotations', version.ref = 'annotations' }
@@ -36,6 +37,7 @@
 	mappings = { module = 'org.quiltmc:quilt-mappings', version.ref = 'mappings' }
 	qfapi = { module = 'org.quiltmc.quilted-fabric-api:quilted-fabric-api', version.ref = 'qfapi' }
 	modmenu = { module = 'com.terraformersmc:modmenu', version.ref = 'modmenu' }
+	mextras = { module = 'com.github.LlamaLad7:MixinExtras', version.ref = 'mextras' }
 
 [bundles]
 	manifold_comp = [

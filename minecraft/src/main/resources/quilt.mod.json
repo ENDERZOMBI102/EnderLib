@@ -26,7 +26,10 @@
 				"id": "minecraft",
 				"versions": ">=1.18.2"
 			}
-		]
+		],
+		"entrypoints": {
+			"pre_launch": [ "com.enderzombi102.enderlib.minecraft.impl.pre.QuiltPrelaunchImpl" ]
+		}
 	},
 	"mixin": "enderlib.mixins.json",
 	"modmenu": {

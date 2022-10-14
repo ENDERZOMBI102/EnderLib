@@ -66,6 +66,18 @@ public class ArrayUtil {
 	}
 
 	/**
+	 * Constructs an array with the provided values.<br>
+	 * Similar to {@link ListUtil#listOf(Object[])}, but with arrays.
+	 * @param values array's items.
+	 * @param <T> type of array.
+	 * @return array with provided items.
+	 */
+	@SafeVarargs
+	public static <T> T[] arrayOf( T... values ) {
+		return values;
+	}
+
+	/**
 	 * Returns an array with the classes of all the given objects
 	 * @param values objects to get the classes from
 	 * @return the {@link Class} array

@@ -2,6 +2,7 @@ package com.enderzombi102.enderlib;
 
 import com.sun.tools.attach.VirtualMachine;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -9,6 +10,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
 import static com.enderzombi102.enderlib.reflection.Invokers.invokeStatic;
@@ -109,5 +111,15 @@ public class RuntimeUtil {
 			return path;
 		else
 			throw new IllegalStateException("Failed to find jar!");
+	}
+
+	/**
+	 * Calls the provided supplier and returns its result.
+	 * @param supplier supplier to call.
+	 * @param <T> return type.
+	 * @return supplier's result.
+	 */
+	public static <T> T run( Supplier<T> supplier ) {
+		return supplier.get();
 	}
 }

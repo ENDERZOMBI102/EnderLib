@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static com.enderzombi102.enderlib.reflection.Getters.get;
 import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
@@ -115,5 +116,15 @@ public class RuntimeUtil {
 			return Paths.get( "./../build/libs/", nameGetter.apply(false) );
 		else
 			throw new IllegalStateException("Failed to find jar!");
+	}
+
+	/**
+	 * Calls the provided supplier and returns its result.
+	 * @param supplier supplier to call.
+	 * @param <T> return type.
+	 * @return supplier's result.
+	 */
+	public static <T> T run( Supplier<T> supplier ) {
+		return supplier.get();
 	}
 }

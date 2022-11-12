@@ -1,10 +1,17 @@
-@file:Suppress("PropertyName", "UnstableApiUsage")
-
+@file:Suppress("PropertyName", "UnstableApiUsage", "DEPRECATION", "LocalVariableName")
 plugins {
 	id( "org.quiltmc.loom" ) version "0.12.+"
 }
 
-version = "$version+${project.ext["main_version"]}"
+version = buildString {
+	val parts = ( version as String ).split("-")
+	append( parts[0] )
+	append( "+" )
+	val main_version: String by project.ext
+	append( main_version.removeSuffix("-SNAPSHOT") )
+	if ( parts.size == 2 )
+		append( "-SNAPSHOT" )
+}
 
 sourceSets {
 	create("testmod") {
@@ -14,20 +21,17 @@ sourceSets {
 }
 
 repositories {
-	maven( url="https://jitpack.io" )
 	maven( url="https://maven.terraformersmc.com" )
 	maven( url="https://maven.quiltmc.org/repository/release" )
 	maven( url="https://maven.quiltmc.org/repository/shanpshot" )
 }
 
 val mappings: String by project
-val minecraft_version = rootProject.libs.versions.minecraft.get()
+val minecraft_version: String by project
 val testmodImplementation by configurations
 dependencies {
 	minecraft( "com.mojang:minecraft:$minecraft_version" )
-	mappings( loom.layered {
-		addLayer( quiltMappings.mappings( "org.quiltmc:quilt-mappings:$minecraft_version+build.$mappings:v2" ) )
-	})
+	mappings( "org.quiltmc:quilt-mappings:$minecraft_version+build.$mappings:intermediary-v2" )
 	modImplementation( rootProject.libs.bundles.minecraft.modImplementation )
 
 	include( rootProject.libs.mextras )
@@ -49,6 +53,11 @@ loom {
 
 		create("testmodClient") {
 			client()
+			runDir = "../run"
+			source(sourceSets["testmod"])
+		}
+		create("testmodServer") {
+			server()
 			runDir = "../run"
 			source(sourceSets["testmod"])
 		}

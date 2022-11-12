@@ -15,6 +15,7 @@ allprojects {
 
 	repositories {
 		mavenCentral()
+		maven( url="https://jitpack.io" )
 	}
 
 	// take the version referred by this project from the root one

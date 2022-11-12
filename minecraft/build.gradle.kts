@@ -1,6 +1,6 @@
 @file:Suppress("PropertyName", "UnstableApiUsage", "DEPRECATION", "LocalVariableName")
 plugins {
-	id( "org.quiltmc.loom" ) version "0.12.+"
+	id( "org.quiltmc.loom" ) version "1.0.+"
 }
 
 version = buildString {
@@ -44,23 +44,19 @@ dependencies {
 	testmodImplementation( sourceSets.main.get().output )
 }
 
-loom {
-	shareRemapCaches.set(true)
+loom.runConfigs {
+	get("client").runDir = "../run"
+	get("server").runDir = "../run"
 
-	runConfigs {
-		get("client").runDir = "../run"
-		get("server").runDir = "../run"
-
-		create("testmodClient") {
-			client()
-			runDir = "../run"
-			source(sourceSets["testmod"])
-		}
-		create("testmodServer") {
-			server()
-			runDir = "../run"
-			source(sourceSets["testmod"])
-		}
+	create("testmodClient") {
+		client()
+		runDir = "../run"
+		source(sourceSets["testmod"])
+	}
+	create("testmodServer") {
+		server()
+		runDir = "../run"
+		source(sourceSets["testmod"])
 	}
 }
 

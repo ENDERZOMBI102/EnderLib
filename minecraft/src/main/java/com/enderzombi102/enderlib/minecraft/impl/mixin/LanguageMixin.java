@@ -17,11 +17,11 @@ public class LanguageMixin {
 			target = "Lcom/google/gson/JsonObject;entrySet()Ljava/util/Set;"
 		)
 	)
-	private static JsonObject onLoad( JsonObject value ) {
+	private static @NotNull JsonObject onLoad( @NotNull JsonObject value ) {
 		return recursiveLoadTranslations( "", value, new JsonObject() );
 	}
 
-	private static JsonObject recursiveLoadTranslations( @NotNull String currentKey, JsonObject obj, JsonObject result ) {
+	private static @NotNull JsonObject recursiveLoadTranslations( @NotNull String currentKey, @NotNull JsonObject obj, @NotNull JsonObject result ) {
 		for ( var entry : obj.entrySet() ) {
 			if ( entry.getValue() instanceof JsonObject newObj )
 				recursiveLoadTranslations(

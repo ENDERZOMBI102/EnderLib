@@ -2,7 +2,6 @@ package com.enderzombi102.enderlib;
 
 import com.sun.tools.attach.VirtualMachine;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -21,7 +20,7 @@ public class RuntimeUtil {
 	 * @param module module's name
 	 * @throws Throwable if something went wrong
 	 */
-	public static void openModule( String module ) throws Throwable {
+	public static void openModule( @NotNull String module ) throws Throwable {
 		invokeStatic(
 			"jdk.internal.module.Modules",
 			"loadModule",

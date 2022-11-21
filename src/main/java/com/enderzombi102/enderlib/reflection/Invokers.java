@@ -44,6 +44,9 @@ public final class Invokers {
 		if ( params.length == 0 )
 			return (T) handle.invoke();
 
+		if ( params.length == 1 )
+			return (T) handle.invoke( params[0] );
+
 		return (T) handle.invoke( params );
 	}
 

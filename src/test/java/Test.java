@@ -1,3 +1,4 @@
+import com.enderzombi102.enderlib.RuntimeUtil;
 import com.enderzombi102.enderlib.reflection.Getters;
 import com.enderzombi102.enderlib.reflection.Invokers;
 import com.enderzombi102.enderlib.reflection.Reflection;
@@ -22,5 +23,7 @@ public class Test {
 		assert Valve.values().length == 5;
 		Reflection.add( Valve.class, "Three" );
 		assert Valve.values().length == 6;
+
+		RuntimeUtil.openModule( "jdk.hotspot" );
 	}
 }

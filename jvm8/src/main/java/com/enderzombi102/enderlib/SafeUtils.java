@@ -38,11 +38,36 @@ public final class SafeUtils {
 		}
 	}
 
-	public interface ThrowingRunnable<TEx extends Throwable> {
-		void run() throws TEx;
+	/**
+	 * Tries to get the given supplier, throwing a {@link RuntimeException} if an exception is thrown inside it.
+	 * @param supplier supplier to get.
+	 * @param <T> return type of the supplier.
+	 * @return the supplier's returned value.
+	 */
+	public static <T> @NotNull T tryThrow( @NotNull ThrowingSupplier<T, ?> supplier ) {
+		try {
+			return supplier.get();
+		} catch ( Throwable e ) {
+			throw new RuntimeException( e );
+		}
 	}
 
-	public interface ThrowingSupplier<T, TEx extends Throwable> {
-		T get() throws TEx;
+	/**
+	 * Tries to run the given runnable, throwing a {@link RuntimeException} if an exception is thrown inside it.
+	 */
+	public static void tryThrow( @NotNull ThrowingRunnable<?> runnable ) {
+		try {
+			runnable.run();
+		} catch ( Throwable e ) {
+			throw new RuntimeException( e );
+		}
+	}
+
+	public interface ThrowingRunnable<Ex extends Throwable> {
+		void run() throws Ex;
+	}
+
+	public interface ThrowingSupplier<T, Ex extends Throwable> {
+		T get() throws Ex;
 	}
 }

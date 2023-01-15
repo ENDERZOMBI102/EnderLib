@@ -10,20 +10,12 @@ import static com.enderzombi102.enderlib.reflection.Reflection.IMPL_LOOKUP;
 public final class Invokers {
 	private Invokers() { }
 
-	public static <T> T invoke( Object obj, String name, Class<T> retType, Object... args ) {
-		try {
-			return (T) IMPL_LOOKUP.bind( obj, name, MethodType.methodType( retType, classes( args ) ) ).invoke( args );
-		} catch ( Throwable e ) {
-			throw new RuntimeException( e );
-		}
+	public static <T> T invoke( Object obj, String name, Class<T> retType, Object... args ) throws Throwable {
+		return (T) IMPL_LOOKUP.bind( obj, name, MethodType.methodType( retType, classes( args ) ) ).invoke( args );
 	}
 
-	public static void invoke( Object obj, String name, Object... args ) {
-		try {
-			IMPL_LOOKUP.bind( obj, name, MethodType.methodType( void.class, classes( args ) ) ).invoke( args );
-		} catch ( Throwable e ) {
-			throw new RuntimeException( e );
-		}
+	public static void invoke( Object obj, String name, Object... args ) throws Throwable {
+		IMPL_LOOKUP.bind( obj, name, MethodType.methodType( void.class, classes( args ) ) ).invoke( args );
 	}
 
 	public static <T> T invokeStatic( String clazz, String name, Class<T> retType, Object... params ) throws Throwable {

@@ -30,7 +30,7 @@ allprojects {
 
 	tasks.withType<Jar> {
 		from( "LICENSE" ) {
-			rename { "${it}_$archiveBaseName" }
+			rename { "${it}_${archiveBaseName.get()}" }
 		}
 		filteringCharset = "UTF-8"
 

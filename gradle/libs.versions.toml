@@ -3,7 +3,7 @@
 	annotations = '23.0.0'
 	slf4j = '1.8.0-beta4'
 	# manifold modules
-	manifold = '2022.1.19'
+	manifold = '2022.2.35'
 	# minecraft modules
 	loader = '0.17.4'
 	qfapi = '4.0.0-beta.7+0.59.0-1.19.2'

@@ -8,8 +8,10 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.util.Map;
 
-import static com.enderzombi102.enderlib.collections.ArrayUtil.*;
-import static com.enderzombi102.enderlib.collections.ListUtil.*;
+import static com.enderzombi102.enderlib.collections.ArrayUtil.arrayOf;
+import static com.enderzombi102.enderlib.collections.ArrayUtil.arrayType;
+import static com.enderzombi102.enderlib.collections.ListUtil.append;
+import static com.enderzombi102.enderlib.collections.ListUtil.mutableListOf;
 import static com.enderzombi102.enderlib.reflection.Getters.getStatic;
 import static com.enderzombi102.enderlib.reflection.Invokers.invoke;
 import static com.enderzombi102.enderlib.reflection.Setters.setStatic;
@@ -25,28 +27,26 @@ public final class Reflection {
 	 * @param clazz the enum's class
 	 * @param name name of the value to add
 	 */
-	public static < T extends Enum<T> > void add( Class<T> clazz, String name ) {
-		try {
-			// get old array
-			var arr = getStatic( clazz, "$VALUES", arrayType( clazz ) );
-			// create new enum instance
-			var value = (T) IMPL_LOOKUP.findConstructor(
-				clazz,
-				MethodType.methodType( void.class, String.class, int.class )
-			).invoke( name, arr.length );
-			// set $VALUES to new array
-			setStatic(
-				clazz,
-				"$VALUES",
-				append( mutableListOf( arr ), value ).toArray( arrayOf( clazz ) )
-			);
-			// add to const dir
-			invoke(
-				clazz,
-				"enumConstantDirectory",
-				Map.class
-			).put( name, value );
-		} catch ( Throwable e ) { throw new RuntimeException(e); }
+	public static < T extends Enum<T> > void add( Class<T> clazz, String name ) throws Throwable {
+		// get old array
+		var arr = getStatic( clazz, "$VALUES", arrayType( clazz ) );
+		// create new enum instance
+		var value = (T) IMPL_LOOKUP.findConstructor(
+			clazz,
+			MethodType.methodType( void.class, String.class, int.class )
+		).invoke( name, arr.length );
+		// set $VALUES to new array
+		setStatic(
+			clazz,
+			"$VALUES",
+			append( mutableListOf( arr ), value ).toArray( arrayOf( clazz ) )
+		);
+		// add to const dir
+		invoke(
+			clazz,
+			"enumConstantDirectory",
+			Map.class
+		).put( name, value );
 	}
 
 	/**

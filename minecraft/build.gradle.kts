@@ -39,7 +39,7 @@ dependencies {
 	annotationProcessor( rootProject.libs.mextras )
 
 	implementation( include( rootProject )!! )
-	implementation( include( project( ":manifolds" ) )!! )
+//	implementation( include( project( ":manifolds" ) )!! )
 
 	testmodImplementation( sourceSets.main.get().output )
 }

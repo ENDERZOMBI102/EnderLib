@@ -10,5 +10,5 @@ pluginManagement {
 
 include( "jvm8" )
 include( "minecraft", /*"minecraft-jvm8"*/ )
-include( "manifolds", "manifolds-jvm8" )
+//include( "manifolds", "manifolds-jvm8" )
 

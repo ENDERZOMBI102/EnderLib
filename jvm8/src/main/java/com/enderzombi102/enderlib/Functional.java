@@ -8,6 +8,7 @@ import org.jetbrains.annotations.UnknownNullability;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 /**
  * Utilities to work in a more functional style.
@@ -108,6 +109,16 @@ public class Functional {
 		} catch ( Throwable e ) {
 			throw new RuntimeException( e );
 		}
+	}
+
+	/**
+	 * Creates a function that applies the given function to a value and returns it.
+	 * @param modifier function that will be applied.
+	 * @param <T> type of the modifying object.
+	 * @return a function that applies the given function.
+	 */
+	public static <T> @NotNull UnaryOperator<T> modify( @NotNull Consumer<T> modifier ) {
+		return obj -> { modifier.accept( obj ); return obj; };
 	}
 
 	/**

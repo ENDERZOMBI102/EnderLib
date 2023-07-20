@@ -122,6 +122,14 @@ public class Functional {
 	}
 
 	/**
+	 * Throws a {@link RuntimeException}.
+	 * @param exc exception to be thrown.
+	 */
+	public static void raise( @NotNull RuntimeException exc ) {
+		throw exc;
+	}
+
+	/**
 	 * A function that processes a value and might throw an exception.
 	 * @param <T> function's parameter type.
 	 * @param <R> function's return type.
